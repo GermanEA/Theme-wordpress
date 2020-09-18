@@ -1,2 +1,3 @@
 .vscode/sftp.json
 template-parts/
+*copy*.*
