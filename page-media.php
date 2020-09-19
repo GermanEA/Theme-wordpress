@@ -2,16 +2,19 @@
 
 /**
 
- * Template Name: Conciertos
+ * Template Name: Media
 
  */
 
     get_header(); ?>
 
-    <main class="container">
+    <main class="media-container">
         <div class="sidebar">
             <div class="sidebar-title-wrapper">
-                <h1 class="sidebar-title">CONCIERTOS</h1>
+                <h1 class="sidebar-title">VIDEOS</h1>
+            </div>
+            <div class="sidebar-container">
+                <?php recover_nombre_videos() ?>
             </div>
             <div class="sidebar-footer">
                 <div class="sidebar-footer-wrapper">
@@ -43,13 +46,8 @@
             </div>       
         </div>
 
-        <div class="slider-container">
-            <?php recover_concerts("splide-lateral", false, true) ?>
-            <?php recover_concerts("splide-central", true, false) ?>
-        </div>
-        <div class="date-mobile">
-            <?php recover_concerts("splide-lateral", false, true) ?>
-        </div>
+        <?php recover_videos() ?>
+        
     </main>
 
 <?php get_footer(); ?>

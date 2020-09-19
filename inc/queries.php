@@ -1,6 +1,6 @@
-<!-- Función para recuperar la lista de los conciertos, decir si tiene imagen y enlace a las entradas (Html versión)  -->
 
 <?php
+//  Función para recuperar la lista de los conciertos, decir si tiene imagen y enlace a las entradas (Html versión)
 
 function recover_concerts($nombre_slider, $set_imagen, $set_entradas) {
 
@@ -85,9 +85,8 @@ function recover_concerts($nombre_slider, $set_imagen, $set_entradas) {
 
 <?php } ?>
 
-<!-- Función para recuperar la lista de los conciertos, decir si tiene imagen y enlace a las entradas (PHP versión) -->
-
 <?php
+// Función para recuperar la lista de los conciertos, decir si tiene imagen y enlace a las entradas (PHP versión)
  
 
     function recover_concerts_php($nombre_slider, $set_imagen, $set_entradas) {
@@ -173,3 +172,86 @@ function recover_concerts($nombre_slider, $set_imagen, $set_entradas) {
     }
 
 ?>
+
+<?php
+
+//  Función para recuperar los nombres de la lista de los videos
+
+function recover_nombre_videos() {
+
+?>
+<div class="sidebar-media-wrapper">
+    <div class="sidebar-videos-wrapper">
+        <ul class="sidebar-videos-list">
+        <?php while(have_posts() ): the_post(); ?>
+                <?php 
+                    $args = array(
+                        'post_type' => 'enseco_video',
+                        'order'    => 'ASC',
+                    );
+
+                    $videos = new WP_Query($args);
+                    $cont = 0;
+
+                    while( $videos->have_posts() ): $videos->the_post();
+                    $nombre_video = get_field('nombre_video');
+                    $descripcion_video = get_field('descripcion_video');
+                    $url_video = get_field('url_video');
+                    $cont ++;
+
+                ?>
+            <li class="sidebar-video-wrapper">
+                <a href="#video-<?php echo $cont; ?>" class="sidebar-video-nombre">
+                    <div><?php echo $nombre_video ?></div>
+                </a>
+            </li>
+            <?php endwhile; wp_reset_postdata(); ?> 
+            <?php endwhile; ?>
+        </ul>
+    </div>
+</div>
+
+<?php } ?>
+
+<?php
+
+//  Función para recuperar  la lista de los videos
+
+function recover_videos() {
+
+?>
+<div class="media-wrapper">
+    <div class="videos-wrapper">
+        <ul class="videos-list">
+        <?php while(have_posts() ): the_post(); ?>
+                <?php 
+                    $args = array(
+                        'post_type' => 'enseco_video',
+                        'order'    => 'ASC',
+                    );
+
+                    $videos = new WP_Query($args);
+                    $cont = 0;
+
+                    while( $videos->have_posts() ): $videos->the_post();
+                    $nombre_video = get_field('nombre_video');
+                    $descripcion_video = get_field('descripcion_video');
+                    $url_video = get_field('url_video');
+                    $cont ++;
+
+                ?>
+            <li class="video-wrapper">
+                <div class="video-nombre">
+                    <span id="video-<?php echo $cont; ?>"><?php echo $nombre_video ?></span>
+                </div>
+                <div class="video-url">
+                    <iframe src="<?php echo $url_video ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+                </div>
+            </li>
+            <?php endwhile; wp_reset_postdata(); ?> 
+            <?php endwhile; ?>
+        </ul>
+    </div>
+</div>
+
+<?php } ?>
