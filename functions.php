@@ -58,6 +58,8 @@
         wp_enqueue_script( 'scripts', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', true);
         wp_enqueue_script( 'lightbox', get_template_directory_uri() . '/js/lightbox.js', array('jquery'), '2.11.3', true);
         wp_enqueue_script( 'splide', get_template_directory_uri() . '/js/splide.min.js', array('jquery'), '2.4.12', true);
+        wp_enqueue_script( 'media', get_template_directory_uri() . '/js/media.js', array('jquery'), '1.0.0', true);
+
     }
 
     add_action( 'wp_enqueue_scripts', 'enseco_styles' );
@@ -244,7 +246,7 @@
                         } else {
         
                             echo '<a href="#video-'.$cont.'" class="sidebar-video-nombre">';
-                                echo '<div>'.$nombre_video.'</div>';
+                                echo $nombre_video;
                             echo '</a>';
                         }
                         

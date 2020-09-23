@@ -1103,6 +1103,10 @@ body.nav-active .nav__list-item:nth-child(10) {
     background-color: var(--colorBlanco);
   }
 
+  .splide-lateral .splide__track .splide__list .splide__slide.is-active {
+    border-color: var(--colorBlanco);
+  }
+
   /* --------SLIDER CENTRAL--------*/
 
   .splide-central {
@@ -1454,6 +1458,7 @@ body.nav-active .nav__list-item:nth-child(10) {
 
   .media-container {
     overflow: hidden;
+    scroll-behavior: smooth;
   }
   .media-container .media-wrapper {
     margin-left: 400px;
@@ -1461,9 +1466,8 @@ body.nav-active .nav__list-item:nth-child(10) {
     margin-right: 0px;
     margin-bottom: 0px;
     padding: 0;
-
   }
-  
+
   .media-container .media-wrapper .videos-list .video-wrapper {
     width: calc(100vw - 400px);
     height: calc(100vh - 45px);
@@ -1485,10 +1489,19 @@ body.nav-active .nav__list-item:nth-child(10) {
   }
   
   .sidebar-media-wrapper .sidebar-video-wrapper {
-      padding: 13px 5px;
       background-color: var(--colorBlanco);
       border-bottom: 1px dashed var(--colorFondoSidebarAndMenu);
       font-size: 1rem;
+  }
+
+  .sidebar-media-wrapper .sidebar-video-wrapper.is-active {
+    background-color: var(--colorFondoSidebarAndMenu);
+    cursor: default !important;
+    border-color: var(--colorBlanco);
+  }
+
+  .sidebar-media-wrapper .sidebar-video-wrapper.is-active a {
+    color: var(--colorTextoPrincipal);
   }
   
   .sidebar-media-wrapper .sidebar-video-wrapper:hover {
@@ -1501,6 +1514,8 @@ body.nav-active .nav__list-item:nth-child(10) {
   
   .sidebar-media-wrapper .sidebar-video-nombre {
     color: var(--colorNegro);
+    display: block;
+    padding: 13px 5px;
   }
 }
 
