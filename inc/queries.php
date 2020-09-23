@@ -264,7 +264,7 @@ function recover_discografia($nombre_slider, $set_imagen, $set_entradas) {
                     if ($set_imagen) { ?>
                     
                         <figure class="portada">
-                            <a href="<?php echo $url_disco ?>">
+                            <a href="<?php echo $url_disco ?>" target="_blank">
                                 <img src="<?php echo $img_src ?>" alt="<?php echo $img_name ?>">
                             </a>
                         </figure>

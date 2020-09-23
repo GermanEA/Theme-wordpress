@@ -2,8 +2,8 @@
 
     /* Queries */
 
-    require get_template_directory() . '/inc/queries.php';
-
+    //require get_template_directory() . '/inc/queries.php';
+    
     /* Setup */
 
     function enseco_setup() {
@@ -129,5 +129,184 @@
     }
 
     add_action('init', 'enseco_hero_image');
+
+    function recover_concerts($nombre_slider, $set_imagen, $set_entradas) {
+
+        echo '<div class="'.$nombre_slider.'">';
+            echo '<div class="splide__track">';
+                echo '<ul class="splide__list">';
+
+                    while(have_posts() ): the_post();
+
+                        $args = array(
+                            'post_type' => 'enseco_concierto',
+                            //'posts_per_page' => 1,
+                            'orderby'  => 'meta_value_num',
+                            'order'    => 'ASC',
+                            'meta_key' => 'fecha_concierto'
+                        );
+
+                        $conciertos = new WP_Query($args);
+
+                        while( $conciertos->have_posts() ): $conciertos->the_post();
+                        $date = get_field('fecha_concierto'); 
+                        $day = substr($date, 0, 2);
+                        $month = substr($date, 3, 3);
+                        $year = substr($date, -4);
+
+                        $direccion = get_field('direccion_concierto');
+                        $ciudad = get_field('ciudad_concierto');
+                        $sala_conciertos = get_field('sala_concierto');
+                        $entradas = get_field('entradas');
+                        $direccion = get_field('direccion_concierto');
+                        $concierto = get_field('ciudad_concierto');
+                        $img = get_field('cartel_concierto');
+
+                        if ($img){
+                            $img_src = $img['sizes']['large'];
+                            $img_url = $img['url'];
+                            $img_name = $img['name'];
+                        }
+
+                        echo '<li class="splide__slide" data="'.$month.'">';
+
+                        if($set_imagen){
+                            echo '<figure class="concert-poster">';
+                            echo '<img src="'.$img_src.'" alt="'.$sala_conciertos.'">';
+                            echo '</figure>';
+                        }
+
+                            echo '<div class="concert-date">';
+                                echo '<div class="concert-date-wrapper">';
+                                    echo '<div class="number"><p>'.$day.'</p></div>';
+                                    echo '<div class="month-year">';
+                                        echo '<p>'.$month.'</p>';
+                                        echo '<p>'.$year.'</p>';
+                                    echo '</div>';
+                                echo '</div>';                            
+                                echo '<div class="concert-card-wrapper">';
+                                    echo '<div class="concert-hall">';
+                                        echo '<span>'.$sala_conciertos.'</span>';
+                                    echo '</div>';                                   
+                                    echo '<div class="location-wrapper">'.$direccion.' ('.$concierto.')</div>';
+                                echo '</div>';
+                            echo '</div>';                     
+
+                            if($set_entradas) {
+                                if ($entradas) { 
+                                    echo '<a class="concert-sale" href="'.$entradas.'">ENTRADAS</a>';
+                                }else{
+                                    echo '<div class="concert-sale">';
+                                    echo '<span>ENTRADA LIBRE</span>';
+                                    echo '</div>';
+                                }
+                            }
+
+                        echo '</li>';
+
+                        endwhile; wp_reset_postdata(); 
+                    endwhile;              
+
+                echo '</ul>';
+            echo '</div>'; 
+        echo '</div>'; 
+    }
+
+    function recover_videos($set_video, $class) {
+
+    
+        echo '<div class="'.$class.'media-wrapper">';
+            echo '<div class="'.$class.'videos-wrapper">';
+                echo '<ul class="'.$class.'videos-list">';
+                while(have_posts() ): the_post();
+                    $args = array(
+                        'post_type' => 'enseco_video',
+                        'order'    => 'ASC',
+                    );
+
+                    $videos = new WP_Query($args);
+                    $cont = 0;
+
+                    while( $videos->have_posts() ): $videos->the_post();
+                    $nombre_video = get_field('nombre_video');
+                    $descripcion_video = get_field('descripcion_video');
+                    $url_video = get_field('url_video');
+                    $cont ++;
+        
+                    echo '<li class="'.$class.'video-wrapper">';                    
+                        
+                        if($set_video) {
+    
+                            echo '<div id="video-'.$cont.'" class="video-url">';
+                                echo '<iframe src="'.$url_video.'" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+                            echo '</div>';
+        
+                        } else {
+        
+                            echo '<a href="#video-'.$cont.'" class="sidebar-video-nombre">';
+                                echo '<div>'.$nombre_video.'</div>';
+                            echo '</a>';
+                        }
+                        
+                    echo '</li>';
+                    endwhile; wp_reset_postdata();
+                    endwhile;
+                echo '</ul>';
+            echo '</div>';
+        echo '</div>';
+    }
+
+    function recover_discografia($nombre_slider, $set_imagen, $set_entradas) {
+
+        echo '<div class="'.$nombre_slider.'">';
+            echo '<div class="splide__track">';
+                echo '<ul class="splide__list">';
+                while(have_posts() ): the_post();
+                            $args = array(
+                                'post_type' => 'enseco_disco',
+                                'order'    => 'ASC',
+                            );
+        
+                            $discos = new WP_Query($args);
+        
+                            while( $discos->have_posts() ): $discos->the_post();
+                            $date = get_field('fecha_salida'); 
+                            $day = substr($date, 0, 2);
+                            $month = substr($date, 3, 3);
+                            $year = substr($date, -4);
+                            $nombre_disco = get_field('nombre_disco');
+                            $img = get_field('portada');
+                            $url_disco = get_field('url_disco');
+        
+                            if ($img){
+                                $img_src = $img['sizes']['large'];
+                                $img_url = $img['url'];
+                                $img_name = $img['name'];
+                            }
+                    echo '<li class="splide__slide">';
+                            if ($set_imagen) {
+                            
+                                echo '<figure class="portada">';
+                                    echo '<a href="'.$url_disco.'" target="_blank">';
+                                        echo '<img src="'.$img_src.'" alt="'.$img_name.'">';
+                                    echo '</a>';
+                                echo '</figure>';
+                            }
+
+                        echo '<div class="'.$class.'header-disco">';
+                            echo '<div class="'.$class.'nombre-disco">';
+                                echo '<span>'.$nombre_disco.'</span>';
+                            echo '</div>';
+                            echo '<div class="fecha-disco">';
+                                echo '<span>'.$year.'</span>';
+                            echo '</div>';                
+                        echo '</div>';
+                    echo '</li>';
+                    endwhile; wp_reset_postdata(); 
+                    endwhile;
+                echo '</ul>';
+            echo '</div>';
+        echo '</div>';
+    }
 
 ?>

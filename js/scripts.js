@@ -16,48 +16,51 @@
 
 /* CARGA DE SPLIDER */
 
-document.addEventListener( 'DOMContentLoaded', function () {    
+document.addEventListener( 'DOMContentLoaded', function () { 
+    
+    var splideSelector = document.querySelector('.splide-lateral');
 
-
-
-    var splide_lateral = new Splide( '.splide-lateral', {
-        rewind      : true,
-        fixedWidth  : 100,
-        fixedHeight : 64,
-        isNavigation: true,
-        gap         : 10,
-        focus       : 'center',
-        pagination  : false,
-        cover       : true,
-        arrows      : false,
-
-        breakpoints : {
-
-            '600': {
-                fixedWidth  : 66,
-                fixedHeight : 40,
-            }
-
+    if(splideSelector){
+        try {
+            
+            var splide_lateral = new Splide( '.splide-lateral', {
+                rewind      : true,
+                fixedWidth  : 100,
+                fixedHeight : 64,
+                isNavigation: true,
+                gap         : 10,
+                focus       : 'center',
+                pagination  : false,
+                cover       : true,
+                arrows      : false,
+                breakpoints : {
+                    '600': {
+                        fixedWidth  : 66,
+                        fixedHeight : 40,
+                    }
+                }
+        
+            } ).mount();
+        
+            var splide_central = new Splide( '.splide-central', {
+                // type   : 'slide',
+                perPage: 1,
+                perMove: 1,
+                height   : '80vh',
+                pagination : false,
+                arrows     : true,
+                autoWidth: true,
+                focus  : 'center',
+                rewind      : true,
+            } );
+        
+            splide_central.sync( splide_lateral ).mount();
+        } catch (error) {
+            console.log(error);
         }
+        return true;
+    }
 
-    } ).mount();
-
-    var splide_central = new Splide( '.splide-central', {
-
-        // type   : 'slide',
-
-        perPage: 1,
-        perMove: 1,
-        height   : '80vh',
-        pagination : false,
-	    arrows     : true,
-        autoWidth: true,
-        focus  : 'center',
-        rewind      : true,
-
-    } );
-
-    splide_central.sync( splide_lateral ).mount();
 
 } );
 

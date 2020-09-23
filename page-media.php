@@ -21,10 +21,10 @@
                     <span>ENSECO <?php echo Date('Y') ?></span>
                 </div>
                 <div class="sidebar-footer-wrapper">
-                    <span>Contratación: info@kint.es</span>
+                    <a href="mailto:info@kint.es" target="_blank">Management  / INFO@KINT.ES</a>
                 </div>
                 <div class="sidebar-footer-wrapper">
-                    <span>Teléfono: 658 851 367</span>
+                    <a href="tel:+34-620-215-668">Teléfono: (+34) 620 215 668</a>
                 </div>
                 <div class="social-media">
                     <div class="icon-wrap-sm">

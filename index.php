@@ -1,7 +1,9 @@
-<?php
-    get_header();
-
-    echo "<h1>Under construction</h1>";
-
-    get_footer();
+<?php
+
+    get_header();
+
+
+
+    get_footer();
+
 ?>
