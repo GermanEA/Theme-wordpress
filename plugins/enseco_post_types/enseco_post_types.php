@@ -126,4 +126,60 @@ function enseco_videos_post_type() {
 }
 add_action( 'init', 'enseco_videos_post_type', 0 );
 
+// Registrar Custom Post Type Discos
+function enseco_discos_post_type() {
+
+	$labels = array(
+		'name'                  => _x( 'Discos', 'Post Type General Name', 'enseco' ),
+		'singular_name'         => _x( 'Disco', 'Post Type Singular Name', 'enseco' ),
+		'menu_name'             => __( 'Discos', 'enseco' ),
+		'name_admin_bar'        => __( 'Disco', 'enseco' ),
+		'archives'              => __( 'Archivo', 'enseco' ),
+		'attributes'            => __( 'Atributos', 'enseco' ),
+		'parent_item_colon'     => __( 'Disco padre', 'enseco' ),
+		'all_items'             => __( 'Todos los Discos', 'enseco' ),
+		'add_new_item'          => __( 'Agregar Disco', 'enseco' ),
+		'add_new'               => __( 'Agregar Disco', 'enseco' ),
+		'new_item'              => __( 'Nueva Disco', 'enseco' ),
+		'edit_item'             => __( 'Editar Disco', 'enseco' ),
+		'update_item'           => __( 'Actualizar Disco', 'enseco' ),
+		'view_item'             => __( 'Ver Disco', 'enseco' ),
+		'view_items'            => __( 'Ver Disco', 'enseco' ),
+		'search_items'          => __( 'Buscar Disco', 'enseco' ),
+		'not_found'             => __( 'No encontrado', 'enseco' ),
+		'not_found_in_trash'    => __( 'No encontrado en papelera', 'enseco' ),
+		'featured_image'        => __( 'Imagen destacada', 'enseco' ),
+		'set_featured_image'    => __( 'Guardar imagen destacada', 'enseco' ),
+		'remove_featured_image' => __( 'Eliminar imagen destacada', 'enseco' ),
+		'use_featured_image'    => __( 'Utilizar como imagen destacada', 'enseco' ),
+		'insert_into_item'      => __( 'Insertar en Disco', 'enseco' ),
+		'uploaded_to_this_item' => __( 'Agregado en Disco', 'enseco' ),
+		'items_list'            => __( 'Lista de Disco', 'enseco' ),
+		'items_list_navigation' => __( 'Navegación de Disco', 'enseco' ),
+		'filter_items_list'     => __( 'Filtrar Disco', 'enseco' ),
+	);
+	$args = array(
+		'label'                 => __( 'Disco', 'enseco' ),
+		'description'           => __( 'Discos para el sitio', 'enseco' ),
+		'labels'                => $labels,
+		'supports'              => array( 'title', 'editor', 'thumbnail' ),
+		'hierarchical'          => false,
+		'public'                => true,
+		'show_ui'               => true,
+		'show_in_menu'          => true,
+        'menu_position'         => 7,
+        'menu_icon'             => 'dashicons-album',
+		'show_in_admin_bar'     => true,
+		'show_in_nav_menus'     => true,
+		'can_export'            => true,
+		'has_archive'           => true,
+		'exclude_from_search'   => false,
+		'publicly_queryable'    => true,
+		'capability_type'       => 'page',
+	);
+	register_post_type( 'enseco_disco', $args );
+
+}
+add_action( 'init', 'enseco_discos_post_type', 0 );
+
 ?>

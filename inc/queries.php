@@ -177,75 +177,107 @@ function recover_concerts($nombre_slider, $set_imagen, $set_entradas) {
 
 //  Función para recuperar los nombres de la lista de los videos
 
-function recover_nombre_videos() {
+function recover_videos($set_video, $class) {
 
-?>
-<div class="sidebar-media-wrapper">
-    <div class="sidebar-videos-wrapper">
-        <ul class="sidebar-videos-list">
-        <?php while(have_posts() ): the_post(); ?>
-                <?php 
-                    $args = array(
-                        'post_type' => 'enseco_video',
-                        'order'    => 'ASC',
-                    );
+    ?>
+    <div class="<?php echo $class; ?>media-wrapper">
+        <div class="<?php echo $class; ?>videos-wrapper">
+            <ul class="<?php echo $class; ?>videos-list">
+            <?php while(have_posts() ): the_post(); ?>
+                    <?php 
+                        $args = array(
+                            'post_type' => 'enseco_video',
+                            'order'    => 'ASC',
+                        );
+    
+                        $videos = new WP_Query($args);
+                        $cont = 0;
+    
+                        while( $videos->have_posts() ): $videos->the_post();
+                        $nombre_video = get_field('nombre_video');
+                        $descripcion_video = get_field('descripcion_video');
+                        $url_video = get_field('url_video');
+                        $cont ++;
+    
+                    ?>
+                <li class="<?php echo $class; ?>video-wrapper">                    
+                    
+                    <?php if($set_video) { ?>
 
-                    $videos = new WP_Query($args);
-                    $cont = 0;
-
-                    while( $videos->have_posts() ): $videos->the_post();
-                    $nombre_video = get_field('nombre_video');
-                    $descripcion_video = get_field('descripcion_video');
-                    $url_video = get_field('url_video');
-                    $cont ++;
-
-                ?>
-            <li class="sidebar-video-wrapper">
-                <a href="#video-<?php echo $cont; ?>" class="sidebar-video-nombre">
-                    <div><?php echo $nombre_video ?></div>
-                </a>
-            </li>
-            <?php endwhile; wp_reset_postdata(); ?> 
-            <?php endwhile; ?>
-        </ul>
+                        <div id="video-<?php echo $cont; ?>" class="video-url">
+                            <iframe src="<?php echo $url_video ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+    
+                    <?php } else { ?>
+    
+                        <a href="#video-<?php echo $cont; ?>" class="sidebar-video-nombre">
+                            <div><?php echo $nombre_video ?></div>
+                        </a>
+    
+                    <?php } ?>
+                </li>
+                <?php endwhile; wp_reset_postdata(); ?> 
+                <?php endwhile; ?>
+            </ul>
+        </div>
     </div>
-</div>
+    
+    <?php } ?>
 
-<?php } ?>
 
 <?php
 
-//  Función para recuperar  la lista de los videos
+//  Función para recuperar la lista de los discos
 
-function recover_videos() {
+function recover_discografia($nombre_slider, $set_imagen, $set_entradas) {
 
 ?>
-<div class="media-wrapper">
-    <div class="videos-wrapper">
-        <ul class="videos-list">
+<div class="<?php echo $nombre_slider ?>">
+    <div class="splide__track">
+        <ul class="splide__list">
         <?php while(have_posts() ): the_post(); ?>
                 <?php 
                     $args = array(
-                        'post_type' => 'enseco_video',
+                        'post_type' => 'enseco_disco',
                         'order'    => 'ASC',
                     );
 
-                    $videos = new WP_Query($args);
-                    $cont = 0;
+                    $discos = new WP_Query($args);
 
-                    while( $videos->have_posts() ): $videos->the_post();
-                    $nombre_video = get_field('nombre_video');
-                    $descripcion_video = get_field('descripcion_video');
-                    $url_video = get_field('url_video');
-                    $cont ++;
+                    while( $discos->have_posts() ): $discos->the_post();
+                    $date = get_field('fecha_salida'); 
+                    $day = substr($date, 0, 2);
+                    $month = substr($date, 3, 3);
+                    $year = substr($date, -4);
+                    $nombre_disco = get_field('nombre_disco');
+                    $img = get_field('portada');
+                    $url_disco = get_field('url_disco');
 
+                    if ($img){
+                        $img_src = $img['sizes']['large'];
+                        $img_url = $img['url'];
+                        $img_name = $img['name'];
+                    }
                 ?>
-            <li class="video-wrapper">
-                <div class="video-nombre">
-                    <span id="video-<?php echo $cont; ?>"><?php echo $nombre_video ?></span>
-                </div>
-                <div class="video-url">
-                    <iframe src="<?php echo $url_video ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+            <li class="splide__slide">
+                <?php 
+                    if ($set_imagen) { ?>
+                    
+                        <figure class="portada">
+                            <a href="<?php echo $url_disco ?>">
+                                <img src="<?php echo $img_src ?>" alt="<?php echo $img_name ?>">
+                            </a>
+                        </figure>
+                    
+                                
+                <?php } ?>
+                <div class="<?php echo $class; ?>header-disco">
+                    <div class="<?php echo $class; ?>nombre-disco">
+                        <span><?php echo $nombre_disco; ?></span>
+                    </div>
+                    <div class="fecha-disco">
+                        <span><?php echo $year; ?></span>
+                    </div>                
                 </div>
             </li>
             <?php endwhile; wp_reset_postdata(); ?> 

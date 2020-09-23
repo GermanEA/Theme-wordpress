@@ -2,19 +2,16 @@
 
 /**
 
- * Template Name: Media
+ * Template Name: Discografía
 
  */
 
     get_header(); ?>
 
-    <main class="media-container">
+    <main class="container">
         <div class="sidebar">
             <div class="sidebar-title-wrapper">
-                <h1 class="sidebar-title">VIDEOS</h1>
-            </div>
-            <div class="sidebar-container">
-                <?php recover_videos(false, 'sidebar-') ?>
+                <h1 class="sidebar-title">DISCOGRAFÍA</h1>
             </div>
             <div class="sidebar-footer">
                 <div class="sidebar-footer-wrapper">
@@ -46,7 +43,13 @@
             </div>       
         </div>
 
-        <?php recover_videos(true, '') ?>
+        <div class="slider-container">
+            <?php recover_discografia("splide-lateral", false, true) ?>
+            <?php recover_discografia("splide-central", true, false) ?>
+        </div>
+        <div class="date-mobile">
+            <?php recover_discografia("splide-mobile", true, true) ?>
+        </div>
         
     </main>
 
