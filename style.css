@@ -1300,7 +1300,7 @@ body.nav-active .nav__list-item:nth-child(10) {
   }
 
   .splide__arrow {
-    top: 92%;
+    top: 95%;
   }
 
   .splide__arrow--prev {
@@ -1496,12 +1496,12 @@ body.nav-active .nav__list-item:nth-child(10) {
 
   .sidebar-media-wrapper .sidebar-video-wrapper.is-active {
     background-color: var(--colorFondoSidebarAndMenu);
-    cursor: default !important;
     border-color: var(--colorBlanco);
   }
 
-  .sidebar-media-wrapper .sidebar-video-wrapper.is-active a {
-    color: var(--colorTextoPrincipal);
+  .sidebar-media-wrapper .sidebar-video-wrapper.is-active .sidebar-video-nombre {
+    color: var(--colorTextoPrincipal);    
+    cursor: default !important;
   }
   
   .sidebar-media-wrapper .sidebar-video-wrapper:hover {

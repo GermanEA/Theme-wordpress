@@ -5,13 +5,23 @@
 const sidebarVideo = document.querySelector('.sidebar-videos-list');
 const sidebarVideoWrapper = document.querySelectorAll('.sidebar-video-wrapper');
 
-sidebarVideoWrapper[0].classList.add('is-active');
+if ( sidebarVideo != null) {
 
-sidebarVideo.addEventListener('click', (event) => {
+    try {
+        sidebarVideoWrapper[0].classList.add('is-active');
+        
+        sidebarVideo.addEventListener('click', (event) => {
+        
+            const target = event.target.parentElement;
+        
+            sidebarVideoWrapper.forEach( elem => elem.classList.remove('is-active') );
+            target.classList.add('is-active');
+        
+        });
+    
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-    const target = event.target.parentElement;
 
-    sidebarVideoWrapper.forEach( elem => elem.classList.remove('is-active') );
-    target.classList.add('is-active');
-
-});
